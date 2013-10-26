@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<EventMap xmlns="http://mate.asfusion.com/"
+	xmlns:mx="http://www.adobe.com/2006/mxml">
+	<mx:Script>
+		<![CDATA[
+      import com.asfusion.mate.events.Dispatcher;
+      
+      import mx.events.FlexEvent;
+      
+      import org.bigbluebutton.common.events.OpenWindowEvent;
+      import org.bigbluebutton.core.EventConstants;
+      import org.bigbluebutton.main.events.ModuleStartedEvent;
+      import org.bigbluebutton.modules.history.events.HistoryEvent;
+      import org.bigbluebutton.modules.history.services.HistoryService;
+      import org.bigbluebutton.modules.history.services.HistorySender;
+      import org.bigbluebutton.modules.history.services.HistoryReceiver;
+      import org.bigbluebutton.modules.history.views.HistoryWindow;
+		]]>
+	</mx:Script>
+    
+  <EventHandlers type="{HistoryEvent.GET_HISTORY_EVENT}">        
+   		<MethodInvoker generator="{HistoryService}" method="getHistory" />
+  </EventHandlers> 
+  
+    <Injectors target="{HistoryService}">
+    <PropertyInjector targetKey="dispatcher" source="{scope.dispatcher}"/>
+    <PropertyInjector targetKey="receiver" source="{HistoryReceiver}"/>
+    <PropertyInjector targetKey="sender" source="{HistorySender}"/>
+  </Injectors>
+
+  <Injectors target="{HistoryReceiver}">
+    <PropertyInjector targetKey="dispatcher" source="{scope.dispatcher}"/>
+  </Injectors>
+ 
+  <Injectors target="{HistorySender}">
+    <PropertyInjector targetKey="dispatcher" source="{scope.dispatcher}"/>
+  </Injectors>
+  
+</EventMap>

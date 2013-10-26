@@ -21,6 +21,7 @@
 	<!-- Declare module names here -->
 	<property name="BBB_MAIN" value="BigBlueButton" />
 	<property name="BROADCAST" value="BroadcastModule" />
+	<property name="HISTORY" value="HistoryModule" />
 	<property name="CHAT" value="ChatModule" />
 	<property name="PRESENT" value="PresentModule" />
 	<property name="DESKSHARE" value="DeskShareModule" />
@@ -189,6 +190,10 @@
   <target name="build-broadcast" description="Compile Broadcast Module" >
     <build-module src="${SRC_DIR}" target="${BROADCAST}" />
   </target>
+
+       <target name="build-history" description="Compile History Module">
+                <build-module src="${SRC_DIR}" target="${HISTORY}" />
+        </target>
   	
 	<target name="build-chat" description="Compile Chat Module">
 		<build-module src="${SRC_DIR}" target="${CHAT}" />
@@ -522,4 +527,6 @@
 	<target name="cleanandmake" depends="clean-build-all" description="Build BBB client including locales"/>
 
 	<target name="build-poll" depends="init-ant-contrib, build-polling" description="Build only the polling module." />
+
+	<target name="build-custom-history" depends="init-ant-contrib, build-history" description="Build only history module." />
 </project>
